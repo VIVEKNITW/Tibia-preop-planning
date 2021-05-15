@@ -1,6 +1,6 @@
 import bpy
 from bpy.types import Operator
-from .Tibia_helper_functions import copy_object, join_obj, make_axis, join_obj, save_orientation_obj, vertex_group, cursor_to_obj, add_plane, delete_obj, move_to_collection, unhide_list, check_obj_list, check_create_collection, remove_doubles
+from .Tibia_helper_functions import copy_object, join_obj, make_axis, join_obj, save_orientation_obj, vertex_group, cursor_to_obj, add_plane, delete_obj, move_to_collection, unhide_list, check_obj_list, check_create_collection, remove_doubles, boolean_objects, hide_obj, change_dimension
 
 
 class TIBIA_OT_CondylarDifferenceofTibialPlateau(Operator):
@@ -88,9 +88,9 @@ class TIBIA_OT_ProxTibiaVarus(Operator):
         check_list = check_obj_list(["Tibia Mechanical Axis", 'Medial Medial Tibial Plateau P:Cor', 'Lateral Lateral Tibial Plateau P:Cor', 'Ankle Center'])
         if len(check_list) == 0:
             copy_object(bpy.data.objects["Tibia Mechanical Axis"], "Tibia Mechanical Axis ProxTibiaVarus")
-            copy_object(bpy.data.objects['Medial Medial Tibial Plateau P:Cor'], 'Medial Medial Tibial Plateau P:Cor ProxTibiaVarus L2')
-            copy_object(bpy.data.objects['Lateral Lateral Tibial Plateau P:Cor'], 'Lateral Lateral Tibial Plateau P:Cor ProxTibiaVarus L2')
-            make_axis([bpy.data.objects['Medial Medial Tibial Plateau P:Cor ProxTibiaVarus L2'], bpy.data.objects['Lateral Lateral Tibial Plateau P:Cor ProxTibiaVarus L2']], "ProxTibiaVarus L2")
+            copy_object(bpy.data.objects['Medial Medial Tibial Plateau P:Cor'], 'Medial Medial Plateau P:Cor ProxTibiaVarus L2')
+            copy_object(bpy.data.objects['Lateral Lateral Tibial Plateau P:Cor'], 'Lateral Lateral Plateau P:Cor ProxTibiaVarus L2')
+            make_axis([bpy.data.objects['Medial Medial Plateau P:Cor ProxTibiaVarus L2'], bpy.data.objects['Lateral Lateral Plateau P:Cor ProxTibiaVarus L2']], "ProxTibiaVarus L2")
             join_obj([bpy.data.objects["Tibia Mechanical Axis ProxTibiaVarus"], bpy.data.objects["ProxTibiaVarus L2"]], "Prox tibia varus point")
         
             vertex_group(bpy.data.objects["Prox tibia varus point"])
@@ -99,7 +99,7 @@ class TIBIA_OT_ProxTibiaVarus(Operator):
         
             copy_object(bpy.data.objects['Ankle Center'], 'Ankle Center for ProxTibiaVarus')
             copy_object(bpy.data.objects['Lateral Lateral Tibial Plateau'], "Lateral Lateral Tibial Plateau for ProxTibiaVarus")
-            copy_object(bpy.data.objects['Medial Medial Tibial Plateau P:Cor', "Medial Medial Tibial Plateau for ProxTibiaVarus"])
+            copy_object(bpy.data.objects['Medial Medial Tibial Plateau P:Cor'], "Medial Medial Tibial Plateau for ProxTibiaVarus")
             make_axis([bpy.data.objects["Prox tibia varus point"], bpy.data.objects['Ankle Center for ProxTibiaVarus']], "Prox tibia varus 1")
             make_axis([bpy.data.objects["Prox tibia varus point copy"],bpy.data.objects["Lateral Lateral Tibial Plateau for ProxTibiaVarus"]], "Prox tibia varus 2")
             make_axis([bpy.data.objects["Prox tibia varus point copy1"],bpy.data.objects[ "Medial Medial Tibial Plateau for ProxTibiaVarus"]], "Prox tibia varus 3")
@@ -129,11 +129,11 @@ class TIBIA_OT_ProxMedialTibiaVarus(Operator):
         
         check_list = check_obj_list(["Tibia Mechanical Axis", 'Medial Medial Tibial Plateau P:Cor', 'Lateral Lateral Tibial Plateau P:Cor', 'Ankle Center',"Tibia Knee Center"])
         if len(check_list) == 0:
-            copy_object(bpy.data.objects["Tibia Mechanical Axis"], "Tibia Mechanical Axis for ProxMedialTibiaVarus L1")
+            copy_object(bpy.data.objects["Tibia Mechanical Axis"], "Tibia Mechanical Axis ProxMedialTibiaVarus L1")
             copy_object(bpy.data.objects['Medial Medial Tibial Plateau P:Cor'], 'Medial Medial Plateau ProxMedialTibiaVarus L2')
             copy_object(bpy.data.objects["Tibia Knee Center"], "Tibia Knee Center ProxMedialTibiaVarus L2")
             make_axis([bpy.data.objects['Medial Medial Plateau ProxMedialTibiaVarus L2'], bpy.data.objects["Tibia Knee Center ProxMedialTibiaVarus L2"]], "ProxMedialTibiaVarus L2")
-            join_obj([bpy.data.objects["Tibia Mechanical Axis for ProxMedialTibiaVarus L1"], bpy.data.objects["ProxMedialTibiaVarus L2"]],"Prox Medial Tibia Varus")
+            join_obj([bpy.data.objects["Tibia Mechanical Axis ProxMedialTibiaVarus L1"], bpy.data.objects["ProxMedialTibiaVarus L2"]],"Prox Medial Tibia Varus")
             remove_doubles(bpy.data.objects["Prox Medial Tibia Varus"])
             move_to_collection("Tibia_Measurements", bpy.data.objects["Prox Medial Tibia Varus"])
         else:
@@ -162,7 +162,7 @@ class TIBIA_OT_ProxLateralTibiaVarus(Operator):
             copy_object(bpy.data.objects["Tibia Mechanical Axis"], "Tibia Mechanical Axis for ProxLateralTibiaVarus L1")
             copy_object(bpy.data.objects['Lateral Lateral Tibial Plateau P:Cor'], 'Lateral Lateral Plateau ProxLateralTibiaVarus L2')
             copy_object(bpy.data.objects["Tibia Knee Center"], "Tibia Knee Center ProxLateralTibiaVarus L2")
-            make_axis([bpy.data.objects['Lateral Lateral Plateau ProxLateralTibiaVarus L2'], bpy.data.objects["Tibia Knee Center ProxMedialTibiaVarus L2"]], "ProxLateralTibiaVarus L2")
+            make_axis([bpy.data.objects['Lateral Lateral Plateau ProxLateralTibiaVarus L2'], bpy.data.objects["Tibia Knee Center ProxLateralTibiaVarus L2"]], "ProxLateralTibiaVarus L2")
             join_obj([bpy.data.objects["Tibia Mechanical Axis for ProxLateralTibiaVarus L1"], bpy.data.objects["ProxLateralTibiaVarus L2"]], "Prox Lateral Tibia Varus")
             remove_doubles(bpy.data.objects["Prox Lateral Tibia Varus"])
             move_to_collection("Tibia_Measurements", bpy.data.objects["Prox Lateral Tibia Varus"])
@@ -251,6 +251,49 @@ class TIBIA_OT_PCATibiatoTibAPAxis(Operator):
         return {'FINISHED'}
 
 
+class TIBIA_OT_ProxTibiaSlope(Operator):
+    """ """
+    bl_label = "Prox tibia slope"
+    bl_idname = "object.proxtibiaslope"
+    bl_options = {"REGISTER", "UNDO"}
+    
+    def execute(self, context):
+        check_create_collection(["Tibia_Landmarks", "Tibia_Axes", "Tibia_Planes", "Tibia_Projections", "Tibia_Measurements"])
+        unhide_list(["Prox tibia slope", "Tibia Distal Plane", "Tibia Sagittal Plane"])
+
+        try:
+            delete_obj(bpy.data.objects["Prox tibia slope"])
+        except:
+            pass
+        
+        check_list = check_obj_list(["Tibia Distal Plane", "Tibia Sagittal Plane"])
+        if len(check_list) == 0:
+            bpy.ops.transform.create_orientation(use=True)
+            bpy.ops.object.editmode_toggle()
+            cursor_to_obj(bpy.data.objects['Tibia Knee Center'])
+            add_plane("Fit Plane")
+            copy_object(bpy.data.objects['Fit Plane'], "Prox tibia slope")
+            copy_object(bpy.data.objects["Tibia Distal Plane"], "Tibia Distal Plane for ProxTibiaSlope")
+            copy_object(bpy.data.objects["Tibia Sagittal Plane"], "Tibia Sagittal Plane for ProxTibiaSlope")
+
+            change_dimension(bpy.data.objects["Tibia Distal Plane for ProxTibiaSlope"], (118, 118, 0))
+            change_dimension(bpy.data.objects["Tibia Sagittal Plane for ProxTibiaSlope"], (116, 116, 0))
+            
+            boolean_objects(bpy.data.objects["Prox tibia slope"], bpy.data.objects["Tibia Distal Plane for ProxTibiaSlope"])
+            boolean_objects(bpy.data.objects["Prox tibia slope"], bpy.data.objects["Tibia Sagittal Plane for ProxTibiaSlope"])
+            move_to_collection("Tibia_Measurements", bpy.data.objects["Prox tibia slope"])
+            delete_obj(bpy.data.objects["Tibia Distal Plane for ProxTibiaSlope"])
+            delete_obj(bpy.data.objects["Tibia Sagittal Plane for ProxTibiaSlope"])
+            
+            hide_obj('Fit Plane')
+            hide_obj("Tibia Distal Plane")
+            hide_obj("Tibia Sagittal Plane")
+            hide_obj("Tibia Coronal Plane")
+        else:
+            self.report({'ERROR'}, "missing items:" + ", ".join(check_list))
+        return {'FINISHED'}
+        
+
 
 class TIBIA_OT_AngleTEA_TibiaAPAxis(Operator):
     """ """
@@ -260,17 +303,17 @@ class TIBIA_OT_AngleTEA_TibiaAPAxis(Operator):
     
     def execute(self, context):
         check_create_collection(["Tibia_Landmarks", "Tibia_Axes", "Tibia_Planes", "Tibia_Projections", "Tibia_Measurements"])
-        unhide_list(["Angle TEA & Tibia AP axis", 'Lateral Epicondyle P:Dis', 'Medial Epicondyle P:Dis','PCL Insertion P:Dis', 'Tibia Tuberosity P:Dis'])
+        unhide_list(["Angle TEA & Tibia AP axis", "Lateral Epicondyle P:TIB_Dis", "Medial Epicondyle P:TIB_Dis",'PCL Insertion P:Dis', 'Tibia Tuberosity P:Dis'])
 
         try:
             delete_obj(bpy.data.objects["Angle TEA & Tibia AP axis"])
         except:
             pass
         
-        check_list = check_obj_list(['Lateral Epicondyle P:Dis', 'Medial Epicondyle P:Dis','PCL Insertion P:Dis', 'Tibia Tuberosity P:Dis'])
+        check_list = check_obj_list(["Lateral Epicondyle P:TIB_Dis", "Medial Epicondyle P:TIB_Dis",'PCL Insertion P:Dis', 'Tibia Tuberosity P:Dis'])
         if len(check_list) == 0:
-            copy_object(bpy.data.objects['Lateral Epicondyle P:Dis'], 'Lateral Epicondyle AngleTEA_TibiaAPAxis L1')
-            copy_object(bpy.data.objects['Medial Epicondyle P:Dis'], 'Medial Epicondyle AngleTEA_TibiaAPAxis L1')
+            copy_object(bpy.data.objects["Lateral Epicondyle P:TIB_Dis"], 'Lateral Epicondyle AngleTEA_TibiaAPAxis L1')
+            copy_object(bpy.data.objects["Medial Epicondyle P:TIB_Dis"], 'Medial Epicondyle AngleTEA_TibiaAPAxis L1')
             copy_object(bpy.data.objects['PCL Insertion P:Dis'], 'PCL Insertion AngleTEA_TibiaAPAxis L2')
             copy_object(bpy.data.objects['Tibia Tuberosity P:Dis'], 'Tibia Tuberosity AngleTEA_TibiaAPAxis L2')
 
@@ -282,7 +325,7 @@ class TIBIA_OT_AngleTEA_TibiaAPAxis(Operator):
             vertex_group(bpy.data.objects["Angle TEA & Tibia AP axis point"])
             copy_object(bpy.data.objects["Angle TEA & Tibia AP axis point"], "Angle TEA & Tibia AP axis point copy")
         
-            copy_object(bpy.data.objects['Lateral Epicondyle P:Dis'], 'Lateral Epicondyle P:Dis AngleTEA_TibiaAPAxis')
+            copy_object(bpy.data.objects["Lateral Epicondyle P:TIB_Dis"], 'Lateral Epicondyle P:Dis AngleTEA_TibiaAPAxis')
             copy_object(bpy.data.objects['PCL Insertion P:Dis'], 'PCL Insertion P:Dis AngleTEA_TibiaAPAxis')
             
             make_axis([bpy.data.objects["Angle TEA & Tibia AP axis point"], bpy.data.objects['Lateral Epicondyle P:Dis AngleTEA_TibiaAPAxis']], "AngleTEA_TibiaAPAxis 1")

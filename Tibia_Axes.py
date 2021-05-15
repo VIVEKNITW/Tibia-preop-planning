@@ -68,7 +68,7 @@ class TIBIA_OT_TransEpicondylarAxis(Operator):
 
     def execute(self, context):
         
-        check_create_collection(["Landmarks", "Axes"])
+        check_create_collection(["Tibia_Landmarks", "Tibia_Axes"])
         unhide_list(["Trans Epicondylar Axis", 'Lateral Epicondyle', 'Medial Epicondyle'])
 
         try:
@@ -82,7 +82,7 @@ class TIBIA_OT_TransEpicondylarAxis(Operator):
             copy_object(bpy.data.objects['Medial Epicondyle'], "Medial Epicondyle for TEA")
             make_axis([bpy.data.objects['Lateral Epicondyle for TEA'], bpy.data.objects['Medial Epicondyle for TEA']], "Trans Epicondylar Axis")
 
-            move_to_collection("Axes", bpy.data.objects["Trans Epicondylar Axis"])
+            move_to_collection("Tibia_Axes", bpy.data.objects["Trans Epicondylar Axis"])
         else:
             self.report({'ERROR'}, "missing items:" + ", ".join(check_list))
       

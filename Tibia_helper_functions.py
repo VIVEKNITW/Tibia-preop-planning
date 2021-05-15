@@ -17,6 +17,13 @@ def unhide_list(myList):
         except:
             pass
 
+
+def hide_obj(obj_name):
+    try:
+        bpy.data.objects[obj_name].hide_set(True)
+    except:
+        pass
+
 def select_activate(obj):
     deselect()
     obj.select_set(True)
@@ -215,3 +222,15 @@ def add_single_vert(name):
     bpy.ops.mesh.primitive_vert_add()
     bpy.ops.object.editmode_toggle()
     bpy.context.object.name = name
+
+
+def boolean_objects(obj, target):
+    select_activate(obj)
+    bpy.ops.object.modifier_add(type = "BOOLEAN")
+    bpy.context.object.modifiers["Boolean"].operation = 'UNION'
+    bpy.context.object.modifiers["Boolean"].object = target
+    bpy.ops.object.modifier_apply(apply_as='DATA', modifier="Boolean")
+
+
+def change_dimension(obj, dim):
+    obj.dimensions = dim

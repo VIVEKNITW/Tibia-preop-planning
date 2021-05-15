@@ -1,10 +1,10 @@
 import bpy
 from bpy.types import Operator
 
-class FEMUR_OT_EnableOrDisableMeasureIt(Operator):
+class TIBIA_OT_EnableOrDisableMeasureIt(Operator):
     """ """
     bl_label = "Enable/ Disable Measureit"
-    bl_idname = "object.enabledisablemeasureit"
+    bl_idname = "object.tibenabledisablemeasureit"
     bl_options = {"REGISTER", "UNDO"}
     
     def execute(self, context):

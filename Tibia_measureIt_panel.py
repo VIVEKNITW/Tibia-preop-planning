@@ -1,20 +1,20 @@
 import bpy
 from bpy.types import Panel
 
-class MyProperty(bpy.types.PropertyGroup):
+class MyProperty_Tibia(bpy.types.PropertyGroup):
     my_bool : bpy.props.BoolProperty(
         name="Enable or Disable",
         description="For measureIt enbling/disabling",
         default = False
         )
 
-class FEMUR_PT_MeasureIt(Panel):
+class TIBIA_PT_MeasureIt(Panel):
     """ """
     bl_label = "Measurit"
-    bl_idname = "femur_PT_measureit"
+    bl_idname = "tibia_PT_measureit"
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
-    bl_category = "Femur"
+    bl_category = "Tibia"
 
     def draw(self, context):
         layout = self.layout
@@ -23,7 +23,7 @@ class FEMUR_PT_MeasureIt(Panel):
         row = layout.row()
         layout.prop(mytool, "my_bool", text="Tick box")
         row = layout.row()
-        row.operator("object.enabledisablemeasureit", text = "Enable/Disable Measureit")
+        row.operator("object.tibenabledisablemeasureit", text = "Enable/Disable Measureit")
         row = layout.row()
         row.operator("measureit.addangle", text = "Angle")
         row = layout.row()

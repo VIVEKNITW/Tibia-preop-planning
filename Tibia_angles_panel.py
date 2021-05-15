@@ -25,7 +25,7 @@ class TIBIA_PT_Angles(Panel):
         row = layout.row()
         row.operator("object.pcatibiatotibiaapaxis")
         row = layout.row()
-        row.label(text = "Note: Go into edit mode and select flat surface")
+        row.label(text = "Go into edit mode and select flat surface")
         row = layout.row()
         row.operator("object.proxtibiaslope")
         row = layout.row()

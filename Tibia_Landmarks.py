@@ -272,7 +272,7 @@ class TIBIA_OT_Point2AnkleCenter(Operator):
         return {'FINISHED'}
 
     
-class FEMUR_OT_LateralEpicondyle(Operator):
+class TIBIA_OT_LateralEpicondyle(Operator):
     """ """
     bl_label = "Lateral Epicondyle"
     bl_idname = "object.lateralepicondyle"
@@ -292,7 +292,7 @@ class FEMUR_OT_LateralEpicondyle(Operator):
         return {'FINISHED'}
 
 
-class FEMUR_OT_MedialEpicondyle(Operator):
+class TIBIA_OT_MedialEpicondyle(Operator):
     """ """
     bl_label = "Medial Epicondyle"
     bl_idname = "object.medialepicondyle"

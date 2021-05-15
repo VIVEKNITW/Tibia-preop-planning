@@ -11,8 +11,8 @@ class TIBIA_OT_Projections(Operator):
     def execute(self, context):
         
         check_create_collection(["Tibia_Landmarks", "Tibia_Axes", "Tibia_Planes", "Tibia_Projections"])
-        unhide_list(["Proximal Lateral Tibial Plateau P:Cor"])
-        unhide_list(['Proximal Lateral Tibial Plateau', "Tibia Coronal Plane"])
+        unhide_list(["Proximal Lateral Tibial Plateau P:Cor", "Proximal Lateral Tibial Plateau P:Cor.Sag","Proximal Medial Tibial Plateau P:Cor","Proximal Medial Tibial Plateau P:Cor.Sag", "PCL Insertion P:Cor","PCL Insertion P:Cor.Sag", "Fibula Head P:Cor", "Fibula Head P:Cor.Sag", "Medial Medial Tibial Plateau P:Cor", "Lateral Lateral Tibial Plateau P:Cor","PCL Insertion P:Dis","Tibia Tuberosity P:Dis", "Posterior Lateral Tibial Plateau P:Dis", "Posterior Medial Tibial Plateau P:Dis", "Lateral Epicondyle P:TIB_Dis", "Medial Epicondyle P:TIB_Dis"])
+        unhide_list(['Medial Epicondyle', 'Lateral Epicondyle', 'Posterior Medial Tibial Plateau', 'Posterior Lateral Tibial Plateau', 'PCL Insertion', "Tibia Distal Plane", 'Tibia Tuberosity', 'Lateral Lateral Tibial Plateau', 'Medial Medial Tibial Plateau', "Fibula Head P:Cor", 'Fibula Head', 'PCL Insertion P:Cor', 'PCL Insertion', 'Proximal Medial Tibial Plateau P:Cor', 'Proximal Medial Tibial Plateau', 'Proximal Lateral Tibial Plateau P:Cor', 'Proximal Lateral Tibial Plateau', "Tibia Coronal Plane", "Tibia Sagittal Plane"])
 
         try:
             delete_obj(bpy.data.objects["Proximal Lateral Tibial Plateau P:Cor"])
@@ -145,10 +145,10 @@ class TIBIA_OT_Projections(Operator):
         except:
             pass
         
-        if (len(check_obj_list(['Lateral Lateral Tibial Plateau', "Tibia Sagittal Plane"])) == 0):
+        if (len(check_obj_list(['Lateral Lateral Tibial Plateau', "Tibia Coronal Plane"])) == 0):
             try:
                 copy_object(bpy.data.objects['Lateral Lateral Tibial Plateau'], "Lateral Lateral Tibial Plateau P:Cor")
-                shrinkwrap_obj(bpy.data.objects["Lateral Lateral Tibial Plateau P:Cor"], bpy.data.objects["Tibia Sagittal Plane"])
+                shrinkwrap_obj(bpy.data.objects["Lateral Lateral Tibial Plateau P:Cor"], bpy.data.objects["Tibia Coronal Plane"])
                 move_to_collection("Tibia_Projections", bpy.data.objects["Lateral Lateral Tibial Plateau P:Cor"])        
             except:
                 pass
@@ -211,28 +211,30 @@ class TIBIA_OT_Projections(Operator):
 
 
         try:
-            delete_obj(bpy.data.objects["Lateral Epicondyle P:Dis"])
+            delete_obj(bpy.data.objects["Lateral Epicondyle P:TIB_Dis"])
         except:
             pass
         
         if (len(check_obj_list(['Lateral Epicondyle', "Tibia Distal Plane"])) == 0):
             try:
-                copy_object(bpy.data.objects['Lateral Epicondyle'], "Lateral Epicondyle P:Dis")
-                shrinkwrap_obj(bpy.data.objects["Lateral Epicondyle P:Dis"], bpy.data.objects["Tibia Distal Plane"])
-                move_to_collection("Tibia_Projections", bpy.data.objects["Lateral Epicondyle P:Dis"])        
+                copy_object(bpy.data.objects['Lateral Epicondyle'], "Lateral Epicondyle P:TIB_Dis")
+                shrinkwrap_obj(bpy.data.objects["Lateral Epicondyle P:TIB_Dis"], bpy.data.objects["Tibia Distal Plane"])
+                move_to_collection("Tibia_Projections", bpy.data.objects["Lateral Epicondyle P:TIB_Dis"])        
             except:
                 pass
 
 
         try:
-            delete_obj(bpy.data.objects["Medial Epicondyle P:Dis"])
+            delete_obj(bpy.data.objects["Medial Epicondyle P:TIB_Dis"])
         except:
             pass
         
         if (len(check_obj_list(['Medial Epicondyle', "Tibia Distal Plane"])) == 0):
             try:
-                copy_object(bpy.data.objects['Medial Epicondyle'], "Medial Epicondyle P:Dis")
-                shrinkwrap_obj(bpy.data.objects["Medial Epicondyle P:Dis"], bpy.data.objects["Tibia Distal Plane"])
-                move_to_collection("Tibia_Projections", bpy.data.objects["Medial Epicondyle P:Dis"])        
+                copy_object(bpy.data.objects['Medial Epicondyle'], "Medial Epicondyle P:TIB_Dis")
+                shrinkwrap_obj(bpy.data.objects["Medial Epicondyle P:TIB_Dis"], bpy.data.objects["Tibia Distal Plane"])
+                move_to_collection("Tibia_Projections", bpy.data.objects["Medial Epicondyle P:TIB_Dis"])        
             except:
                 pass
+        
+        return {'FINISHED'}
